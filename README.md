@@ -11,27 +11,27 @@ Getting Started
 
 Assuming you have a Go package with a public API that is changing
 
-1.  Copy (or clone, submodule add, ...) this repository into a
+1.	Copy (or clone, submodule add, ...) this repository into a
 	subdirectory of your package (e.g. "gomypkgfix").  Alternatively,
 	simply copy these files from the Go source tree:
-
 	- `src/cmd/fix/fix.go`
 	- `src/cmd/fix/main.go`
 	- `src/cmd/fix/main_test.go`
 	- `LICENSE`
-
-2.  In your package's documentation, include lines like these:
-    
+2.	In your package's documentation, include instructions somewhat
+	like these:
+	
 	> Package "mypkg" has made some public changes that will break old
 	> code.  Fortunately, a command has been written based on `go fix`
 	> that will upgrade your code for you.  After backing up your code,
 	> run these commands:
 	>
-	> 	go get <path to mypkg>/gomypkgfix
-	> 	cd $YOUR_PACKAGE
-	> 	gomypkgfix .
-
-3.  Make sure those instructions actually work without error.
+	> ```
+	> go get <path to mypkg>/gomypkgfix
+	> cd $YOUR_PACKAGE
+	> gomypkgfix .
+	> ```
+3.	Make sure those instructions actually work without error.
 
 So far, your `gomypkgfix` command doesn't do anything.  To change this
 you have to include a working fix.  There are some examples included in
@@ -94,8 +94,8 @@ var minimalTests = []testCase{
 Test-driven development is the recommended workflow:
 
 1. Add (or modify an existing) test case.
-2. Run the tests, see them fail.
-3. Modify the code until the test passes.
+2. Run the tests, see the new one fail.
+3. Modify the code until all tests pass.
 4. Repeat until the tests verify the requirements have been met.
 
 Publishing a Fix
