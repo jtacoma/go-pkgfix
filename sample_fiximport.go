@@ -24,7 +24,6 @@ func fiximport(f *ast.File) bool {
 	if spec == nil {
 		return false
 	}
-	println(spec.Path.Value)
 	spec.Path.Value = "\"example.com/mypkg2\""
 	return true
 }
