@@ -41,55 +41,13 @@ source tree under `src/cmd/fix`.
 Writing a Fix
 -------------
 
-Each fix is a pair of files: the fix itself, and the tests that validate
-the fix (test-driven development is highly recommended).  Here is a very
-small fix, `minimal.go`:
+Each fix is a pair of files: the fix itself, and the tests that validate the
+fix.  Two examples are included:
 
-```go
-package main
-
-import (
-	"go/ast"
-)
-
-func init() {
-	register(minimalFix)
-}
-
-var minimalFix = fix{
-	"minimal",
-	"2013-07-21", // when this fix was published
-	minimal,
-	`
-	Don't change anything.
-`,
-}
-
-func minimal(f *ast.File) bool {
-	// This method MUST return true if and only if it has
-	// made changes to f.
-	return false
-}
-```
-
-The `main_test.go` file includes a pretty nifty testing harness: instead of writing your own testing code, you just register some test cases from `init()`.  Here's `minimal_test.go`:
-
-```go
-package main
-
-func init() {
-	addTestCases(minimalTests, minimal)
-}
-
-var minimalTests = []testCase{
-{
-	Name: "minimal.0",
-	In: `package main
-`
-	Out: `package main
-`
-}
-```
+- *sample_fiximport* updates any code that imports `"example.com/mypkg"` to
+  import `"example.com/mypkg2"` instead.
+- *sample_structize* updates any code that uses certain interface types from
+  mypkg to use instead the struct types that replace them.
 
 Test-driven development is the recommended workflow:
 
@@ -103,7 +61,8 @@ Publishing a Fix
 
 Before publishing, double check the following:
 
-- You have tested against other code bases to make sure the unit tests haven't missed anything.
+- You have tested against other code bases to make sure the unit tests haven't
+  missed anything.
 
 Tips and Tricks
 ---------------
