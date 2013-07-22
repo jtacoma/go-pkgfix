@@ -63,19 +63,3 @@ Before publishing, double check the following:
 
 - You have tested against other code bases to make sure the unit tests haven't
   missed anything.
-
-Tips and Tricks
----------------
-
-One of the subtleties is that if a package is imported with an alias, the alias must be used in the new type expression.  Conveniently, the files copied from Go's `src/cmd/fix` provide a convenience function `importSpec` that finds this alias.
-
-```go
-spec := importSpec(f, "<canonical path to mypkg>")
-if spec == nil {
-	return false
-}
-mypkg := "<un-aliased name of mypkg>"
-if spec.Name != nil {
-	mypkg = spec.Name.Name
-}
-```
